@@ -7,24 +7,26 @@ using UnityEngine;
 // 입력에 따라 버블의 발사 방향과 속도를 결정합니다.
 
 public enum TouchState { TouchBegan, TouchMoved, TouchEnd }
+
 public class PlayerInput : MonoBehaviour
 {
     public TouchState state;
+
     private void Update()
     {
         // 터치가 시작되었을 때
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-
+            state = TouchState.TouchBegan;
         } // 터치 시작 후 스와이프할 때
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
-            // 스와이프 처리
+            state = TouchState.TouchMoved;
         }
         // 터치가 끝났을 때
         if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled))
         {
-            // 터치 종료 처리
+            state = TouchState.TouchEnd;
         }
     }
 }
