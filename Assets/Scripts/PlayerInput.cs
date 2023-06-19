@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum TouchState { TouchBegan, TouchMoved, TouchEnd }
+public enum TouchState { TouchBegan, TouchMoved, TouchEnd, Stationary }
 
 public static class PlayerInput
 {
@@ -12,11 +12,14 @@ public static class PlayerInput
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
             if (touch.phase == TouchPhase.Began)
             {
                 state = TouchState.TouchBegan;
                 touchPos = GetScreenPosition(touch.position);
+            }
+            else if (touch.phase == TouchPhase.Stationary)
+            {
+                state = TouchState.Stationary;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
